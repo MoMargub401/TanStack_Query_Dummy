@@ -6,20 +6,30 @@ import { NavLink } from "react-router-dom";
 const FetchRq = () => {
   const [pageNumber, setPageNumber] = useState(0);
 
-  //   const getPostsData = async () => {
-  //     try {
-  //       const res = await fetchPosts();
-  //       res.status === 200 ? res?.data : [];
-  //     } catch (error) {
-  //       console.log(error);
-  //       return [];
-  //     }
-  //   };
+  const getPostsData = async () => {
+    try {
+      const res = await fetchPosts();
+      return res.status === 200 ? res?.data : [];
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  };
 
-  const { data } = useQuery({
+  const { data, isPending, isError, error } = useQuery({
     queryKey: ["posts"],
-    queryFn: () => fetchPosts(pageNumber),
+    queryFn: getPostsData,
   });
+
+  if (isPending) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    console.log(error.message);
+
+    return <span>{error?.message || "Something went wrong"}</span>;
+  }
 
   const handleDelete = () => {
     console.log("Deleted");
