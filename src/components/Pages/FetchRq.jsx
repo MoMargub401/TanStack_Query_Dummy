@@ -28,7 +28,7 @@ const FetchRq = () => {
   if (isError) {
     console.log(error.message);
 
-    return <span>{error?.message || "Something went wrong"}</span>;
+    return <span>{error?.message || "Something went wrong!"}</span>;
   }
 
   const handleDelete = () => {

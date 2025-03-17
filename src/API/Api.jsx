@@ -15,8 +15,6 @@ export const fetchPosts = async (pageNumber) => {
   }
 };
 
-// to fetch the indv. data
-
 export const fetchInvPost = async (id) => {
   try {
     const res = await api.get(`/posts/${id}`);
@@ -25,9 +23,6 @@ export const fetchInvPost = async (id) => {
     console.log(error);
   }
 };
-
-// ..pagination
-//! https://jsonplaceholder.typicode.com/posts?_start=1&_limit=3
 
 /// to delete the post
 export const deletePost = (id) => {
